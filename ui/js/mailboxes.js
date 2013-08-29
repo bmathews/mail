@@ -12,7 +12,6 @@ function MailboxesController($scope, $rootScope) {
                     $rootScope.showError(err);
                 } else {
                     $scope.folders = folders;
-                    $scope.selectedFolder = folders[0];
                 }
             });
         });
