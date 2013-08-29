@@ -1,3 +1,7 @@
+.modal {
+    display: block;
+}
+
 .main-container {
     height: 100%;
     display: -webkit-flex;

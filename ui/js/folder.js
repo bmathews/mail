@@ -1,6 +1,6 @@
 function FolderController($scope, $rootScope) {
-  var ewsApi = require('./../lib/protocol/ews/api'),
-    api;
+    var ewsApi = require('./../lib/protocol/ews/api'),
+        api;
 
     ewsApi.initialize({
         url: 'owa.atsid.com',
@@ -13,7 +13,11 @@ function FolderController($scope, $rootScope) {
     $rootScope.$on('selectedFolder', function (e, folder) {
         api.getEmails(folder.id, {}, function (err, emails) {
             $scope.$apply(function () {
-                $scope.emails = emails;
+                if (err) {
+                    $rootScope.showError(err);
+                } else {
+                    $scope.emails = emails;
+                }
             });
         });
     });
