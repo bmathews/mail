@@ -11,6 +11,7 @@ function FolderController($scope, $rootScope) {
     });
 
     $rootScope.$on('selectedFolder', function (e, folder) {
+        $scope.emails = null;
         api.getEmails(folder.id, {}, function (err, emails) {
             $scope.$apply(function () {
                 if (err) {

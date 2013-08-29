@@ -46,7 +46,7 @@
                 </ul>
             </div>
             <div style="" class="messages-container" ng-controller="FolderController">
-                <div ng-show="!emails.length" class="text-center" style="color: #999; margin: 10px;">No emails in this folder.</div>
+                <div ng-show="!!emails && !emails.length" class="text-center" style="color: #999; margin: 10px;">No emails in this folder.</div>
                 <div class="message-row" ng-click="selectEmail(email)" ng-class="{active: email === selectedEmail}" ng-repeat="email in emails">
                     <div class="message-top-row">
                         <span class="message-from"><span ng-hide="!!email.isRead" class="label label-primary">Unread</span> {{ email.from }} </span>
