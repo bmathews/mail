@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="WebApp">
     <head>
         <title>Mail</title>
 
@@ -8,6 +8,8 @@
         <!-- <link href="bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet"> -->
 
         <script src="bower_components/angular/angular.min.js"></script>
+        
+        <script src="js/app.js"></script>
         <script src="js/mailboxes.js"></script>
         <script src="js/folder.js"></script>
         <script src="js/message.js"></script>
@@ -31,6 +33,7 @@
         </script>
     </head>
     <body>
+        <div ng-controller="ErrorController"></div>
         <div class="main-container">
             <div class="mailbox-container" ng-controller="MailboxesController">
                 <ul class="nav nav-pills nav-stacked">
