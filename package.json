@@ -5,7 +5,7 @@
   "window": {
       // "toolbar": false,
       // "frame": false,
-      "width": 600,
+      "width": 1000,
       "height": 400
   },
   "dependencies": {

@@ -23,20 +23,24 @@ html, body {
 
 .mailbox-container {
     -webkit-flex: 1 1 20%;
-           flex: 1 6 20%;
+           flex: 1 1 20%;
     -webkit-order: 1;
            order: 1;
     padding: 5px;
     border-right: 1px solid #ddd;
     background: #f1f1f1;
+    max-width: 200px;
+    min-width: 150px;
 }
 
 .messages-container {
-    -webkit-flex: 1 1 20%;
-           flex: 1 1 20%;
+    -webkit-flex: 1 1 30%;
+           flex: 1 1 30%;
     -webkit-order: 2;
            order: 2;
     border-right: 1px solid #eee;
+    max-width: 300px;
+    min-width: 300px;
 }
 
 .messages-container .message-row {
@@ -78,8 +82,8 @@ html, body {
 }
 
 .message-container {
-    -webkit-flex: 2 1 60%;
-           flex: 2 1 60%;
+    -webkit-flex: 2 1 50%;
+           flex: 2 1 50%;
    -webkit-order: 3;
            order: 3;
     padding: 15px;
