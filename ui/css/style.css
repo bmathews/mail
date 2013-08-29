@@ -1,0 +1,82 @@
+.main-container {
+    height: 100%;
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-flex-flow: row;
+           flex-flow: row;
+}
+
+html, body {
+    height: 100%;
+}
+
+.mailbox-container, .message-container, .messages-container {
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.mailbox-container {
+    -webkit-flex: 1 1 20%;
+           flex: 1 6 20%;
+    -webkit-order: 1;
+           order: 1;
+    padding: 5px;
+    border-right: 1px solid #ddd;
+    background: #f1f1f1;
+}
+
+.messages-container {
+    -webkit-flex: 1 1 20%;
+           flex: 1 1 20%;
+    -webkit-order: 2;
+           order: 2;
+    border-right: 1px solid #eee;
+}
+
+.messages-container .message-row {
+    padding: 8px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.messages-container .message-row.active {
+    background: #4489d0;
+}
+
+.messages-container .message-row.active * {
+    color: #fff !important; 
+}
+
+.messages-container .message-top-row {
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-flex-flow: row;
+           flex-flow: row;
+}
+
+
+.messages-container .message-top-row .message-from {
+    padding-right: 5px;
+    font-weight: 500;
+
+    -webkit-flex: 1;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+    
+}
+.messages-container .message-top-row .message-date {
+    line-height: 18px;
+    color: #999;
+    font-size: 11px;
+}
+
+.message-container {
+    -webkit-flex: 2 1 60%;
+           flex: 2 1 60%;
+   -webkit-order: 3;
+           order: 3;
+    padding: 15px;
+}

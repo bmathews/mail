@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app>
+    <head>
+        <title>Mail</title>
+
+        <link href="css/style.css" rel="stylesheet">
+        <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        <!-- <link href="bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet"> -->
+
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="js/mailboxes.js"></script>
+        <script src="js/folder.js"></script>
+        <script src="js/message.js"></script>
+
+        <script>
+            // global.$ = $;
+            global.gui = require('nw.gui')
+
+            
+
+            window.addEventListener('load', function() { 
+                // new app();
+            }, false);
+
+            //show dev tools with ctrl+alt + j
+            // $(window.document).keydown(function (e) {
+            //     if (e.altKey && e.ctrlKey && (e.which === 10 || e.keyCode === 74)) {
+            //         global.gui.Window.get().showDevTools();
+            //     }
+            // });
+        </script>
+    </head>
+    <body>
+        <div class="main-container">
+            <div class="mailbox-container" ng-controller="MailboxesController">
+                <ul class="nav nav-pills nav-stacked">
+                    <li ng-click="selectMailbox(folder)" ng-class="{active: folder === selectedFolder}" ng-repeat="folder in folders">
+                        <a>{{ folder.name }} <span ng-show="folder.unreadCount" class=" pull-right badge">{{ folder.unreadCount }}</span></a>
+                    </li>
+                </ul>
+            </div>
+            <div style="" class="messages-container" ng-controller="FolderController">
+                <div class="message-row" ng-click="selectEmail(email)" ng-class="{active: email === selectedEmail}" ng-repeat="email in emails">
+                    <div class="message-top-row">
+                        <span class="message-from"><span ng-hide="!!email.isRead" class="label label-primary">Unread</span> {{ email.from }} </span>
+                        <span class="text-right message-date"> {{email.dateTimeReceived }}</span>
+                    </div>
+                    <div class="message-subject" style="color: #999; clear: both;"> {{email.subject}} </div>
+                </div>
+            </div>
+            <div class=" message-container" ng-controller="MessageController">
+                <h3>{{email.subject}}</h3>
+                <hr>
+                <div>
+                    <div ng-bind-html="email.body"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

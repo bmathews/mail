@@ -1,0 +1,19 @@
+{
+  "name": "mail",
+  "version": "0.1.0",
+  "main": "ui/index.html",
+  "window": {
+      // "toolbar": false,
+      // "frame": false,
+      "width": 600,
+      "height": 400
+  },
+  "dependencies": {
+    "exchanger": "*",
+    "request": "*",
+    "async": "*",
+    "agentkeepalive": "*",
+    "soap": "~0.2.7",
+    "xml2js": "0.1.14"
+  }
+}
