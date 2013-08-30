@@ -8,6 +8,38 @@
 
         <link href="css/style.css" rel="stylesheet">
 
+        
+    </head>
+    <body>
+        <div ng-controller="ErrorController"></div>
+        <div class="main-container">
+            <div class="mailbox-container" ng-controller="MailboxesController">
+                <button class="btn btn-xs btn-primary" ng-click="showSettings()">Settings</button>
+                <ul class="nav nav-pills nav-stacked">
+                    <li ng-click="selectMailbox(folder)" ng-class="{active: folder === selectedFolder}" ng-repeat="folder in folders">
+                        <a>{{ folder.name }} <span ng-show="folder.unreadCount" class=" pull-right badge">{{ folder.unreadCount }}</span></a>
+                    </li>
+                </ul>
+            </div>
+            <div style="" class="messages-container" ng-controller="FolderController">
+                <div ng-show="!!emails && !emails.length" class="text-center" style="color: #999; margin: 10px;">No emails in this folder.</div>
+                <div class="message-row" ng-click="selectEmail(email)" ng-class="{active: email === selectedEmail}" ng-repeat="email in emails">
+                    <div class="message-top-row">
+                        <span class="message-from"><div ng-hide="!!email.isRead" class="unread"></div> {{ email.from }} </span>
+                        <span class="text-right message-date"> {{email.dateTimeReceived }}</span>
+                    </div>
+                    <div class="message-subject" style="color: #999; clear: both;"> {{email.subject}} </div>
+                </div>
+            </div>
+            <div class=" message-container" ng-controller="MessageController">
+                <h3>{{email.subject}}</h3>
+                <hr>
+                <div>
+                    <div ng-bind-html="email.body"></div>
+                </div>
+            </div>
+        </div>
+
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-ui/build/angular-ui.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -34,34 +66,5 @@
             //     }
             // });
         </script>
-    </head>
-    <body>
-        <div ng-controller="ErrorController"></div>
-        <div class="main-container">
-            <div class="mailbox-container" ng-controller="MailboxesController">
-                <ul class="nav nav-pills nav-stacked">
-                    <li ng-click="selectMailbox(folder)" ng-class="{active: folder === selectedFolder}" ng-repeat="folder in folders">
-                        <a>{{ folder.name }} <span ng-show="folder.unreadCount" class=" pull-right badge">{{ folder.unreadCount }}</span></a>
-                    </li>
-                </ul>
-            </div>
-            <div style="" class="messages-container" ng-controller="FolderController">
-                <div ng-show="!!emails && !emails.length" class="text-center" style="color: #999; margin: 10px;">No emails in this folder.</div>
-                <div class="message-row" ng-click="selectEmail(email)" ng-class="{active: email === selectedEmail}" ng-repeat="email in emails">
-                    <div class="message-top-row">
-                        <span class="message-from"><div ng-hide="!!email.isRead" class="unread"></div> {{ email.from }} </span>
-                        <span class="text-right message-date"> {{email.dateTimeReceived }}</span>
-                    </div>
-                    <div class="message-subject" style="color: #999; clear: both;"> {{email.subject}} </div>
-                </div>
-            </div>
-            <div class=" message-container" ng-controller="MessageController">
-                <h3>{{email.subject}}</h3>
-                <hr>
-                <div>
-                    <div ng-bind-html="email.body"></div>
-                </div>
-            </div>
-        </div>
     </body>
 </html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="WebApp">
+    <head>
+        <title>Mail</title>
+
+        <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        <!-- <link href="bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet"> -->
+
+        <link href="css/style.css" rel="stylesheet">
+
+        
+    </head>
+    <body>
+        <div ng-controller="ErrorController"></div>
+        <div class="main-container">
+            <div class="mailbox-container" ng-controller="AreaListController">
+                <h6>ACCOUNTS</h6>
+                <ul class="nav nav-pills nav-stacked">
+                    <li ng-click="selectAccount(account)" ng-class="{active: account === selectedAccount}" ng-repeat="account in accounts">
+                        <a>{{ account.name }}</a>
+                    </li>
+                    <li ng-click="newAccount()">
+                        <a>New Account</a>
+                    </li>
+                </ul>
+                <h6>SETTINGS</h6>
+            </div>
+            <div class="messages-container" ng-controller="AccountEditorController">
+                <div class="form-horizontal" ng-show="!!selectedAccount" style="padding: 10px;">
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">Name</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" ng-model="selectedAccount.name"></input>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">URL</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" ng-model="selectedAccount.account.settings.url"></input>    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">Username</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" ng-model="selectedAccount.account.settings.username"></input>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">Password</label>
+                        <div class="col-xs-8">
+                            <input type="password" class="form-control" ng-model="selectedAccount.account.settings.password"></input>
+                        </div>
+                    </div>
+                    <!-- <button class="btn btn-primary" ng-click="saveAccount()">Save</button> -->
+                    <button class="pull-right btn btn-danger" ng-click="deleteAccount()">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-ui/build/angular-ui.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="js/settings/areaList.js"></script>
+        <script src="js/settings/accountEditor.js"></script>
+        <script src="js/common/error/errorList.js"></script>
+        <script src="js/app.js"></script>
+
+        <script>
+            global.gui = require('nw.gui')
+        </script>
+    </body>
+</html>

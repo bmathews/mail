@@ -1,11 +1,9 @@
 function MailboxesController($scope, $rootScope) {
-    var ewsApi = require('./../lib/protocol/ews/api');
+    var accounts = require('./../lib/accounts');
 
-    ewsApi.initialize({
-        url: 'owa.atsid.com',
-        username: 'brian.mathews',
-        password: ''
-    }, function (api) {
+    $scope.$on('accountsReady', function () {
+        var api = accounts.getAccounts()['atsid'].api;
+
         api.getFolders(function (err, folders) {
             $scope.$apply(function () {
                 if (err) {
@@ -16,6 +14,19 @@ function MailboxesController($scope, $rootScope) {
             });
         });
     });
+
+    $scope.showSettings = function () {
+        var win = global.gui.Window.open('settings.html', {
+            width: 500,
+            resizable: false,
+            height: 300
+            // toolbar: false
+        });
+        setTimeout(function () {
+            win.focus();
+        }, 100);
+    };
+
 
     $scope.selectMailbox = function (folder) {
         $scope.selectedFolder = folder;

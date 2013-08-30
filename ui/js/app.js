@@ -1,10 +1,16 @@
 'use strict';
 
+var accounts = require('../lib/accounts');
+
 /**
  * Application module
  */
 angular.module('WebApp', ['common.error', 'ui.bootstrap'])
     .run(['$rootScope', function ($rootScope) {
+
+        accounts.initialize(function () {
+            $rootScope.$broadcast('accountsReady');
+        });
 
         $rootScope.errors = [];
 
@@ -24,6 +30,6 @@ angular.module('WebApp', ['common.error', 'ui.bootstrap'])
          * @param {String} message Error message to show
          */
         $rootScope.showError = function (message) {
-            $rootScope.errors.push(angular.isString(message) ? message : '');
+            $rootScope.errors.push(angular.isString(message) ? message : message.toString());
         };
     }]);
