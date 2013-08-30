@@ -17,28 +17,52 @@ html, body {
 .mailbox-container, .message-container, .messages-container {
     height: 100%;
     box-sizing: border-box;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-flex-flow: column;
+           flex-flow: column;
 }
+
+.container-toolbar {
+    background: #f1f1f1;
+    border-bottom: 1px solid #DDD;
+    padding: 4px;
+        -webkit-flex: 1;
+           flex: 1;
+    min-height: 42px;
+    max-height: 42px;
+    border-right: 1px solid #DDD;
+}
+
+.container-content {
+    -webkit-flex: 1;
+           flex: 1;
+           overflow: auto;
+    border-right: 1px solid #eee;
+}
+
+
 
 .mailbox-container {
     -webkit-flex: 1 1 20%;
            flex: 1 1 20%;
-    -webkit-order: 1;
-           order: 1;
-    padding: 5px;
-    border-right: 1px solid #ddd;
-    background: #f1f1f1;
+    /*background: #f1f1f1;*/
     max-width: 200px;
     min-width: 150px;
+}
+
+.mailbox-container .container-content {
+    padding: 5px;
+}
+
+.mailbox-container .nav > li > a {
+    padding: 3px 15px;
 }
 
 .messages-container {
     -webkit-flex: 1 1 30%;
            flex: 1 1 30%;
-    -webkit-order: 2;
-           order: 2;
-    border-right: 1px solid #eee;
     max-width: 300px;
     min-width: 300px;
 }
@@ -49,7 +73,45 @@ html, body {
 }
 
 .messages-container .message-row.active {
-    background: #4489d0;
+    background: #f6f7f9;
+}
+
+.message-container {
+    -webkit-flex: 1;
+           flex: 1;
+    min-width: 300px;
+}
+
+.message-container .message-body .plain {
+    white-space: pre-wrap;
+}
+
+.message-container .message-body p {
+    margin: 0;
+}
+
+.message-container .container-content {
+    overflow: hidden;
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-flex-flow: column;
+           flex-flow: column;
+}
+
+.message-container .message-header {
+    -webkit-flex: 1;
+           flex: 1;
+    min-height: 70px;
+    max-height: 70px;
+    padding: 15px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+}
+
+.message-container .message-body {
+    -webkit-flex: 1;
+           flex: 1;
+    overflow: auto;
+    padding: 15px;
 }
 
 .unread {
@@ -62,10 +124,6 @@ html, body {
 
 .active .unread {
     background: #fff;   
-}
-
-.messages-container .message-row.active * {
-    color: #fff !important; 
 }
 
 .messages-container .message-top-row {
@@ -91,12 +149,4 @@ html, body {
     line-height: 18px;
     color: #999;
     font-size: 11px;
-}
-
-.message-container {
-    -webkit-flex: 2 1 50%;
-           flex: 2 1 50%;
-   -webkit-order: 3;
-           order: 3;
-    padding: 15px;
 }

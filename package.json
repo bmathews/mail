@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "main": "ui/index.html",
   "window": {
-    // "toolbar": false,
+    "toolbar": false,
       // "frame": false,
     "width": 1000,
     "height": 400
@@ -13,7 +13,7 @@
     "async": "*",
     "agentkeepalive": "*",
     "soap": "~0.2.7",
-    "xml2js": "0.1.14",
+    "xml2js": "~0.2.8",
     "level": "~0.15.0",
     "levelup": "~0.15.0",
     "leveldown": "~0.8.0"

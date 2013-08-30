@@ -14,28 +14,57 @@
         <div ng-controller="ErrorController"></div>
         <div class="main-container">
             <div class="mailbox-container" ng-controller="MailboxesController">
-                <button class="btn btn-xs btn-primary" ng-click="showSettings()">Settings</button>
-                <ul class="nav nav-pills nav-stacked">
-                    <li ng-click="selectMailbox(folder)" ng-class="{active: folder === selectedFolder}" ng-repeat="folder in folders">
-                        <a>{{ folder.name }} <span ng-show="folder.unreadCount" class=" pull-right badge">{{ folder.unreadCount }}</span></a>
-                    </li>
-                </ul>
+                <div class="container-toolbar" style="padding-top: 6px;">
+                    <!-- <button style="margin: auto auto;" class="btn btn-sm btn-default" ng-click="showSettings()">Settings</button> -->
+                </div>
+                <div class="container-content">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li ng-click="selectMailbox(folder)" ng-class="{active: folder === selectedFolder}" ng-repeat="folder in folders">
+                            <a>{{ folder.name }} <span ng-show="folder.unreadCount" class=" pull-right badge">{{ folder.unreadCount }}</span></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div style="" class="messages-container" ng-controller="FolderController">
-                <div ng-show="!!emails && !emails.length" class="text-center" style="color: #999; margin: 10px;">No emails in this folder.</div>
-                <div class="message-row" ng-click="selectEmail(email)" ng-class="{active: email === selectedEmail}" ng-repeat="email in emails">
-                    <div class="message-top-row">
-                        <span class="message-from"><div ng-hide="!!email.isRead" class="unread"></div> {{ email.from }} </span>
-                        <span class="text-right message-date"> {{email.dateTimeReceived }}</span>
+                <div class="container-toolbar">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
                     </div>
-                    <div class="message-subject" style="color: #999; clear: both;"> {{email.subject}} </div>
+                </div>
+                <div class="container-content">
+                    <div ng-show="!!emails && !emails.length" class="text-center" style="color: #999; margin: 10px;">No emails in this folder.</div>
+                    <div class="message-row" ng-click="selectEmail(email)" ng-class="{active: email === selectedEmail}" ng-repeat="email in emails">
+                        <div class="message-top-row">
+                            <span class="message-from"><div ng-hide="!!email.isRead" class="unread"></div> {{ email.from }} </span>
+                            <span class="text-right message-date"> {{email.dateTimeReceived }}</span>
+                        </div>
+                        <div class="message-subject" style="display: inline-block; width: 100%; color: #999; clear: both;">{{email.subject || " "}} <span ng-show="email.hasAttachments" style="float: right; font-size: 12px; right: -2px; top: 4px;" class="glyphicon glyphicon-paperclip"></span></div>
+                    </div>
                 </div>
             </div>
             <div class=" message-container" ng-controller="MessageController">
-                <h3>{{email.subject}}</h3>
-                <hr>
-                <div>
-                    <div ng-bind-html="email.body"></div>
+                <div class="container-toolbar" style="padding-top: 6px;">
+                    <div class="pull-left">
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-share-alt"></span>
+                        </button>
+                    </div>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="container-content">
+                    <div class="message-header" ng-show="!!email">
+                        <div style="font-weight: 500; font-size: 16px;">{{email.subject}}</div>
+                        <span style="font-weight: 500;">{{email.from.name}}</span>
+                        <span style="margin-left: 10px; color: #999;">{{email.from.emailAddress}}</span>
+                    </div>
+                    <div class="message-body" ng-bind-html="email.body" ng-show="!!email"></div>
                 </div>
             </div>
         </div>
