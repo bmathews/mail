@@ -1,4 +1,12 @@
-function MessageController($scope, $rootScope, $sce) {
+function MessageController($scope, $rootScope, $sce, $element) {
+
+    function replaceImages(id, content) {
+        $($element).find('img').splice(0).forEach(function (img) {
+            if (img.src.indexOf('cid:' + id) === 0) {
+                img.src = 'data:image/png;base64,' + content;
+            }
+        });
+    }
 
     $scope.$on('accountsReady', function () {
         var accounts = require('./../lib/accounts').getAccounts(),
@@ -23,6 +31,14 @@ function MessageController($scope, $rootScope, $sce) {
                         }
                         email.body = $sce.trustAsHtml(email.body);
                         $scope.email = email;
+                    }
+
+                    if (email.attachments.length) {
+                        email.attachments.forEach(function (attachment) {
+                            api.getAttachment(attachment.id, function (err, res) {
+                                replaceImages(attachment.contentId, res.content);
+                            });
+                        });
                     }
                 });
             });
