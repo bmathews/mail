@@ -74,6 +74,10 @@ html, body {
     width: 100%;
 }
 
+.messages-container .message-row:hover {
+    background: #f6f7f9;
+}
+
 .messages-container .message-row.unread {
     /*background: #f1f2f4;*/
     color: #4489d0;
@@ -81,6 +85,17 @@ html, body {
 
 .messages-container .message-row.active {
     background: #f6f7f9;
+}
+
+.messages-container .message-row.active .unread-line {
+    background: #f6f7f9;
+    transition: all 5s ease-in-out;
+    -webkit-transition: all 5s ease-in-out;
+    opacity: 0;
+}
+
+.messages-container .message-row.active * {
+    color: #4489d0 !important;
 }
 
 .message-container {
@@ -128,6 +143,7 @@ html, body {
     top: 0;
     bottom: 0;
     left: 0;
+    opacity: 1;
 }
 
 .messages-container .message-top-row {

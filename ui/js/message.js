@@ -1,4 +1,4 @@
-function MessageController($scope, $rootScope, $sce, $element) {
+function MessageController($scope, $rootScope, $sce, $element, $timeout) {
 
     function replaceImages(id, content) {
         $($element).find('img').splice(0).forEach(function (img) {
@@ -15,13 +15,26 @@ function MessageController($scope, $rootScope, $sce, $element) {
         $rootScope.$on('selectedFolder', function () {
             $scope.email = null;
         });
-        $rootScope.$on('selectedEmail', function (e, email) {
+        $rootScope.$on('selectedEmail', function (e, msgEmail) {
             $scope.email = null;
-            api.getEmailById(email.id, function (err, email) {
+            api.getEmailById(msgEmail.id, function (err, email) {
                 $scope.$apply(function () {
                     if (err) {
                         $rootScope.showError(err);
                     } else {
+                        if (!email.isRead) {
+                            $timeout(function () {
+                                if ($scope.email.id === email.id) {
+                                    api.markAsRead(email.id, email.changeKey, function (err) {
+                                        msgEmail.isRead = true;
+                                        email.isRead = true;
+                                        if (err) {
+                                            $rootScope.showError(err);
+                                        }
+                                    });
+                                }
+                            }, 4000);
+                        }
                         if (email.body.indexOf("</body>") > -1) {
                             email.body = email.body.substr(email.body.indexOf("<body"));
                             email.body = email.body.substr(email.body.indexOf('>') + 1);
