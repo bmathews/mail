@@ -1,4 +1,4 @@
-function MessageController($scope, $rootScope, $sce, $element, $timeout) {
+function MessageController($scope, $rootScope, $element, $timeout) {
 
     function replaceImages(id, content) {
         $($element).find('img').splice(0).forEach(function (img) {
@@ -42,7 +42,7 @@ function MessageController($scope, $rootScope, $sce, $element, $timeout) {
                         } else {
                             email.body = '<div class="plain">' + email.body + '</div>';
                         }
-                        email.body = $sce.trustAsHtml(email.body);
+                        email.body = email.body;
                         $scope.email = email;
                     }
 

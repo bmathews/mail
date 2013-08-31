@@ -1,18 +1,31 @@
 function MailboxesController($scope, $rootScope) {
-    var accounts = require('./../lib/accounts');
+    var accounts = require('./../lib/accounts'),
+        api;
 
-    $scope.$on('accountsReady', function () {
-        var api = accounts.getAccounts()['atsid'].api;
-
-        api.getFolders(function (err, folders) {
+    function getFolders(id, parent) {
+        api.getFolders(id, function (err, folders) {
             $scope.$apply(function () {
                 if (err) {
                     $rootScope.showError(err);
                 } else {
-                    $scope.folders = folders;
+                    if (id && parent) {
+                        parent.children = folders;
+                    } else {
+                        $scope.folders = folders;
+                    }
+                    folders.forEach(function (folder) {
+                        if (folder.childFolderCount > 0) {
+                            getFolders(folder.id, folder);
+                        }
+                    });
                 }
             });
         });
+    }
+
+    $scope.$on('accountsReady', function () {
+        api = accounts.getAccounts()['atsid'].api;
+        getFolders();
     });
 
     $scope.showSettings = function () {

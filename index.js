@@ -5,7 +5,7 @@ ewsApi.initialize({
     username: 'brian.mathews',
     password: ''
 }, function (api) {
-    api.getFolders(function (err, folders) {
+    api.getFolders(null, function (err, folders) {
         console.log("GOT FOLDERS: " + folders.length);
         console.log("Getting mail for: " + folders[0].name + " (" + folders[0].unreadCount + " unread)\n\n");
         api.getEmails(folders[0].id, {}, function (err, emails) {

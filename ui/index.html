@@ -27,8 +27,7 @@
                 </div>
                 <div class="container-content">
                     <ul class="nav nav-pills nav-stacked">
-                        <li ng-click="selectMailbox(folder)" ng-class="{active: folder === selectedFolder}" ng-repeat="folder in folders">
-                            <a>{{ folder.name }} <span ng-show="folder.unreadCount" class=" pull-right badge">{{ folder.unreadCount }}</span></a>
+                        <li ng-class="{active: folder==selectedFolder}" ng-repeat="folder in folders" ng-include="'js/common/tree/tree.tpl.html'">
                         </li>
                     </ul>
                 </div>
@@ -41,7 +40,7 @@
                 </div>
                 <div class="container-content">
                     <div ng-show="!!emails && !emails.length" class="text-center" style="color: #999; margin: 10px;">No emails in this folder.</div>
-                    <div class="message-row" ng-click="selectEmail(email)" ng-class="{active: email === selectedEmail, unread: !email.isRead}" ng-repeat="email in emails">
+                    <div class="message-row" ng-click="selectEmail(email)" ng-class="{active: email==selectedEmail, unread: !email.isRead}" ng-repeat="email in emails">
                         <div ng-hide="email.isRead" class="unread-line"></div>
                         <div class="message-top-row">
                             <span class="message-from"> {{ email.from }} </span>
@@ -67,7 +66,7 @@
                         <span style="font-weight: 500;">{{email.from.name}}</span>
                         <span style="margin-left: 10px; color: #999;">{{email.from.emailAddress}}</span>
                     </div>
-                    <div class="message-body" ng-bind-html="email.body" ng-show="!!email"></div>
+                    <div class="message-body" ng-bind-html-unsafe="email.body" ng-show="!!email"></div>
                 </div>
             </div>
         </div>

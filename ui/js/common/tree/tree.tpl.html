@@ -1,0 +1,5 @@
+<a ng-click="selectMailbox(folder)" >{{ folder.name }} <span ng-show="folder.unreadCount" class=" pull-right badge">{{ folder.unreadCount }}</span></a>
+<ul class="nav nav-pills nav-stacked" style="padding-left: 20px;">
+    <li ng-class="{active: folder==selectedFolder}" ng-repeat="folder in folder.children" ng-include="'js/common/tree/tree.tpl.html'">
+    </li>
+</ul>
