@@ -33,11 +33,14 @@ function MessageController($scope, $rootScope, $sce, $element) {
                         $scope.email = email;
                     }
 
+                    // download inline attachments with a contentId
                     if (email.attachments.length) {
                         email.attachments.forEach(function (attachment) {
-                            api.getAttachment(attachment.id, function (err, res) {
-                                replaceImages(attachment.contentId, res.content);
-                            });
+                            if (attachment.contentId) {
+                                api.getAttachment(attachment.id, function (err, res) {
+                                    replaceImages(attachment.contentId, res.content);
+                                });
+                            }
                         });
                     }
                 });

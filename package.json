@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "main": "ui/index.html",
   "window": {
-    // "toolbar": false,
+    "toolbar": false,
       // "frame": false,
     "width": 1000,
     "height": 400
